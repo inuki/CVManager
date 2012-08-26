@@ -1,0 +1,10 @@
+%h1 Settings
+=form_tag ({:controller => :settings, :action => :update}) do
+  =label_tag(:company_name, "Company name:")
+  =text_field_tag(:company_name, app_config["company_name"])
+  %br
+  =label_tag(:bird_url, "Bird url:")
+  =text_field_tag(:bird_url, app_config["bird_url"])
+  %br
+  =submit_tag("Save")
+

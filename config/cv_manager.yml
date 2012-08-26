@@ -1,0 +1,4 @@
+---
+config:
+  company_name: Company
+  bird_url: http://localhost:8080

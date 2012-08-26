@@ -1,0 +1,18 @@
+%h1 Vitae
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Created At
+      %th &nbsp;
+  %tbody
+    - @vitae.each do |vita|
+      %tr
+        %td= vita.name
+        %td= vita.created_at
+        %td
+          = link_to t('.publish'), "#{app_config["bird_url"]}#{vita.id}", :class => 'btn btn-success btn-mini'
+          = link_to t('.edit'), edit_vita_path(vita), :class => 'btn btn-mini'
+          = link_to t('.destroy'), vita_path(vita), :method => :delete, :confirm => t('.confirm', :default => 'Are you sure?'), :class => 'btn btn-mini btn-danger'
+=link_to t('.new'), new_vita_path, :class => 'btn btn-primary'

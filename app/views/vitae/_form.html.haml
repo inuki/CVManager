@@ -1,0 +1,56 @@
+= simple_nested_form_for(@vita,:html => {:class => 'form-horizontal' }) do |f|
+  =f.input :name
+  =f.input :first_name
+  =f.input :last_name
+  =f.input :photo
+  =f.input :year_of_birth
+  =f.input :role
+  =f.input :role_description, as: :text
+  =f.input :key_aspects, as: :text
+  =f.input :soft_skills, as: :text
+
+  %h2 Skils
+  - SkillBox.TYPES.each do |t|
+    %h3= t.pluralize.to_sym
+    =f.fields_for t.pluralize.to_sym do |i|
+      =i.input :category, as: :hidden
+      =i.input :name
+      =i.input :level, collection: SkillBox.LEVELS
+      =i.link_to_remove "Remove"
+    %p
+      =f.link_to_add "Add", t.pluralize.to_sym
+
+  %h2 Languages
+  =f.fields_for :languages do |i|
+    =i.input :name
+    =i.input :level, collection: Language.LEVES
+    =i.link_to_remove "Remove"
+  %p
+    =f.link_to_add "Add", :languages
+
+  %h2 Experience
+  - ExperienceBox.TYPES.each do |t|
+    %h3= t.pluralize.to_sym
+    =f.fields_for t.pluralize.to_sym do |i|
+      =i.input :category, as: :hidden
+      =i.input :name
+      =i.input :year
+      =i.link_to_remove "Remove"
+    %p
+      =f.link_to_add "Add", t.pluralize.to_sym
+
+  %h2 Projects
+  =f.fields_for :projects do |i|
+    =i.input :name
+    =i.input :role
+    =i.input :customer
+    =i.input :task
+    =i.input :activity
+    =i.input :technical_scope
+
+    =i.input :period_start
+    =i.input :period_end
+    =i.link_to_remove "Remove"
+  %p
+    =f.link_to_add "Add", :projects
+  =f.button :submit
